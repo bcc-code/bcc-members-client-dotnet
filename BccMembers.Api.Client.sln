@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BccMembers.Api.Client", "BccMembers.Api.Client\BccMembers.Api.Client.csproj", "{05C35716-5CD5-4CF2-BAF7-ED0CD2E53A9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BccMembers.Api.Client.Contracts", "BccMembers.Api.Client.Contracts\BccMembers.Api.Client.Contracts.csproj", "{4C2B6D73-504A-432C-AA9F-00D81152C7DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05C35716-5CD5-4CF2-BAF7-ED0CD2E53A9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C35716-5CD5-4CF2-BAF7-ED0CD2E53A9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C35716-5CD5-4CF2-BAF7-ED0CD2E53A9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C35716-5CD5-4CF2-BAF7-ED0CD2E53A9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C2B6D73-504A-432C-AA9F-00D81152C7DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C2B6D73-504A-432C-AA9F-00D81152C7DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C2B6D73-504A-432C-AA9F-00D81152C7DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C2B6D73-504A-432C-AA9F-00D81152C7DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1F74D80-07B3-458D-ABAF-BA32BA76C6FD}
+	EndGlobalSection
+EndGlobal
