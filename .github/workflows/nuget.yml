@@ -6,13 +6,12 @@ on:
       - master
   pull_request:
     branches:
-      - "*"
+      - master
 
 env:
   BUILD_CONFIGURATION: "Release"
   DOTNET_VERSION: "5.0.x"
   GITHUB_PACKAGE_REGISTRY_URL: https://nuget.pkg.github.com/bcc-code/index.json
-  PROJECT: BccMembers.Api.Client.Contracts
 
 jobs:
   gpr-build-and-deploy:
@@ -37,4 +36,4 @@ jobs:
       - name: nuget publish
         run: |
           dotnet nuget push BccMembers.Api.Client.Contracts/bin/Release/*.nupkg -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
-          dotnet nuget push BccMembers.Api.Client/*.nupkg -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+          dotnet nuget push BccMembers.Api.Client/bin/Release/*.nupkg -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
