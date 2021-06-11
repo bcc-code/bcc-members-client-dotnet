@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>9.0</LangVersion>
+    <RepositoryType>https://github.com/bcc-code/bcc-members-client-dotnet</RepositoryType>
+    <PackageTags>git</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
