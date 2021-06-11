@@ -24,7 +24,7 @@ namespace BccMembers.Api.Client.Contracts
 
         public DateTime BirthDate { get; set; }
 
-        public DateTime DeceasedDate { get; set; }
+        public DateTime? DeceasedDate { get; set; }
 
         public Address CurrentAddress { get; set; }
 
@@ -32,7 +32,7 @@ namespace BccMembers.Api.Client.Contracts
 
         public Phone HomePhone { get; set; }
 
-        public DateTime LastChangedDate { get; set; }
+        public DateTime? LastChangedDate { get; set; }
 
         public int GuardianID { get; set; }
 
