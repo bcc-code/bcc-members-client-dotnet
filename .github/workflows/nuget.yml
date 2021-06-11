@@ -1,54 +1,38 @@
-name: Push Nuget Package to GitHub Package Registry
+name: Push Contracts Nuget Package to GitHub Package Registry
 
 on:
-    push:
-        branches:
-            - master
-    pull_request:
-        branches:
-            - "*"
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "*"
 
 env:
-    BUILD_CONFIGURATION: "Release"
-    DOTNET_VERSION: "5.0.x"
-    GITHUB_PACKAGE_REGISTRY_URL: https://nuget.pkg.github.com/bcc-code/index.json
-    PROJECT: BccMembers.Api.Client.Contracts
+  BUILD_CONFIGURATION: "Release"
+  DOTNET_VERSION: "5.0.x"
+  GITHUB_PACKAGE_REGISTRY_URL: https://nuget.pkg.github.com/bcc-code/index.json
+  PROJECT: BccMembers.Api.Client.Contracts
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
+  gpr-build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
 
-            - name: Setup .NET
-              uses: actions/setup-dotnet@v1
-              with:
-                  dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          source-url: ${{ env.GITHUB_PACKAGE_REGISTRY_URL }}
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: dotnet build
-              run: |
-                  dotnet restore
-                  dotnet build '${{env.PROJECT}}/${{env.PROJECT}}.csproj' --configuration '${{ env.BUILD_CONFIGURATION }}'
+      - name: dotnet build and publish
+        run: |
+          dotnet restore '${{env.PROJECT}}/${{env.PROJECT}}.csproj'
+          dotnet build '${{env.PROJECT}}/${{env.PROJECT}}.csproj' --configuration '${{ env.BUILD_CONFIGURATION }}'
+          dotnet pack '${{env.PROJECT}}/${{env.PROJECT}}.csproj' -c '${{ env.BUILD_CONFIGURATION }}'
 
-    gpr-build-and-deploy:
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-
-            - name: Setup .NET
-              uses: actions/setup-dotnet@v1
-              with:
-                  dotnet-version: ${{ env.DOTNET_VERSION }}
-                  source-url: ${{ env.GITHUB_PACKAGE_REGISTRY_URL }}
-              env:
-                  NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-            - name: dotnet build and publish
-              run: |
-                  dotnet restore
-                  dotnet build '${{env.PROJECT}}/${{env.PROJECT}}.csproj' --configuration '${{ env.BUILD_CONFIGURATION }}'
-                  dotnet pack '${{env.PROJECT}}/${{env.PROJECT}}.csproj' -c '${{ env.BUILD_CONFIGURATION }}'
-
-            - name: "nuget publish"
-              run: dotnet nuget push ${{env.PROJECT}}/bin/Release/*.nupkg -api-key ${{ secrets.NUGET_API_KEY }}
+      - name: "nuget publish"
+        run: dotnet nuget push ${{env.PROJECT}}/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }}

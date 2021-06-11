@@ -1,0 +1,27 @@
+name: Push Nuget Package to GitHub Package Registry
+
+on:
+  pull_request:
+    branches:
+      - master
+
+env:
+  BUILD_CONFIGURATION: "Release"
+  DOTNET_VERSION: "5.0.x"
+  PROJECT: BccMembers.Api.Client.Contracts
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: dotnet build
+        run: |
+          dotnet restore
+          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}'
