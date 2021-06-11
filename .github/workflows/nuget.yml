@@ -25,14 +25,14 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
           source-url: ${{ env.GITHUB_PACKAGE_REGISTRY_URL }}
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: dotnet build and publish
         run: |
-          dotnet restore ${{env.PROJECT}}/${{env.PROJECT}}.csproj
-          dotnet build ${{env.PROJECT}}/${{env.PROJECT}}.csproj --configuration ${{ env.BUILD_CONFIGURATION }}
-          dotnet pack ${{env.PROJECT}}/${{env.PROJECT}}.csproj -c ${{ env.BUILD_CONFIGURATION }}
+          dotnet restore
+          dotnet build -c ${{ env.BUILD_CONFIGURATION }}
+          dotnet pack -c ${{ env.BUILD_CONFIGURATION }}
 
       - name: nuget publish
-        run: dotnet nuget push ${{env.PROJECT}}/bin/Release/*.nupkg -k ${{ secrets.NUGET_API_KEY }}
+        run: |
+          dotnet nuget push BccMembers.Api.Client.Contracts/bin/Release/*.nupkg -k ${{ secrets.GITHUB_TOKEN }}
+          dotnet nuget push BccMembers.Api.Client/*.nupkg -k ${{ secrets.GITHUB_TOKEN }}

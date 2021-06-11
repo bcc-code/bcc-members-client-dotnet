@@ -1,4 +1,4 @@
-name: Push Nuget Package to GitHub Package Registry
+name: Build Solution
 
 on:
   pull_request:
@@ -8,7 +8,6 @@ on:
 env:
   BUILD_CONFIGURATION: "Release"
   DOTNET_VERSION: "5.0.x"
-  PROJECT: BccMembers.Api.Client.Contracts
 
 jobs:
   build:
@@ -24,4 +23,4 @@ jobs:
       - name: dotnet build
         run: |
           dotnet restore
-          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}'
+          dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
