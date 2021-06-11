@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using BccMembers.Api.Client.Contracts;
 using BccMembers.Api.Client.Extensions;
@@ -15,13 +14,11 @@ namespace BccMembers.Api.Client
             this.httpClient = httpClient;
         }
 
-        public async Task<BccPerson> GetPersonAsync(int id)
+        public Task<BccPerson> GetPersonAsync(int id)
         {
-            string url = $"person?personID={id}";
+            string url = $"person/{id}";
 
-            PagedData<BccPerson> result = await this.httpClient.GetAsync<PagedData<BccPerson>>(url);
-
-            return result.Data?.FirstOrDefault();
+            return this.httpClient.GetAsync<BccPerson>(url);
         }
     }
 }
