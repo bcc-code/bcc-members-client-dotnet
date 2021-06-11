@@ -1,4 +1,4 @@
-name: Push Contracts Nuget Package to GitHub Package Registry
+name: Push Nuget Packages to GitHub Package Registry
 
 on:
   push:
@@ -36,5 +36,5 @@ jobs:
 
       - name: nuget publish
         run: |
-          dotnet nuget push BccMembers.Api.Client.Contracts/bin/Release/*.nupkg -k ${{ secrets.GITHUB_TOKEN }}
-          dotnet nuget push BccMembers.Api.Client/*.nupkg -k ${{ secrets.GITHUB_TOKEN }}
+          dotnet nuget push BccMembers.Api.Client.Contracts/bin/Release/*.nupkg -k ${{ secrets.NUGET_API_KEY }}
+          dotnet nuget push BccMembers.Api.Client/*.nupkg -k ${{ secrets.NUGET_API_KEY }}
