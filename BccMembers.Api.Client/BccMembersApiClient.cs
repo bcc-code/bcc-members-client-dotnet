@@ -15,9 +15,9 @@ namespace BccMembers.Api.Client
             this.httpClient = httpClient;
         }
 
-        public async Task<BccPerson> GetPersonAsync(int id)
+        public async Task<BccPerson> GetPersonAsync(int personId)
         {
-            string url = $"person?personID={id}";
+            string url = $"person?personID={personId}";
 
             PagedData<BccPerson> result = await this.httpClient.GetAsync<PagedData<BccPerson>>(url);
 
