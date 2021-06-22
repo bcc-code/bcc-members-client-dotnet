@@ -6,7 +6,6 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags></PackageTags>
     <RepositoryUrl>https://github.com/bcc-code/bcc-members-client-dotnet</RepositoryUrl>
-    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
