@@ -36,7 +36,7 @@ jobs:
         run: |
           dotnet restore
           dotnet build -c ${{ env.BUILD_CONFIGURATION }}
-          dotnet pack -c ${{ env.BUILD_CONFIGURATION }}
+          dotnet pack -c ${{ env.BUILD_CONFIGURATION }} -p:PackageVersion=${{ steps.build_number.outputs.major }}.${{ steps.build_number.outputs.minor }}.${{ steps.build_number.outputs.increment }}
 
       - name: nuget publish
         run: |
