@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BccMembers.Api.Client.Contracts;
@@ -22,6 +23,15 @@ namespace BccMembers.Api.Client
             PagedData<BccPerson> result = await this.httpClient.GetAsync<PagedData<BccPerson>>(url);
 
             return result.Data?.FirstOrDefault();
+        }
+        
+        public async Task<List<Church>> GetChurchesAsync()
+        {
+            var url = "org?type=church";
+
+            List<Church> result = await httpClient.GetAsync<List<Church>>(url);
+
+            return result;
         }
     }
 }
