@@ -41,5 +41,9 @@ namespace BccMembers.Api.Client.Contracts
         public int ChurchID { get; set; }
 
         public Relationships Related { get; set; }
+        
+        public string CultureCode1 { get; set; }
+        public string CultureCode2 { get; set; }
+        public string CultureCode3 { get; set; }
     }
 }
