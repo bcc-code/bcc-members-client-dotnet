@@ -7,6 +7,6 @@ namespace BccMembers.Api.Client
     public interface IBccMembersApiClient
     {
         Task<BccPerson> GetPersonAsync(int personId);
-        Task<List<Church>> GetChurchesAsync();
+        Task<List<BccOrg>> GetChurchesAsync();
     }
 }

@@ -25,11 +25,11 @@ namespace BccMembers.Api.Client
             return result.Data?.FirstOrDefault();
         }
         
-        public async Task<List<Church>> GetChurchesAsync()
+        public async Task<List<BccOrg>> GetChurchesAsync()
         {
             var url = "org?type=church";
 
-            List<Church> result = await httpClient.GetAsync<List<Church>>(url);
+            List<BccOrg> result = await httpClient.GetAsync<List<BccOrg>>(url);
 
             return result;
         }
