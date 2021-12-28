@@ -1,0 +1,11 @@
+{
+    "BccMembersApi": {
+        "Authority": "https://bcc-sso-dev.eu.auth0.com",
+        "TokenEndpoint": "/oauth/token",
+        "ClientId": "[USE USER SECRETS]",
+        "ClientSecret": "[USE USER SECRETS]",
+        "Scope": "members.read_person_id members.address",
+        "ApiBasePath": "http://localhost:3030",
+        "ApiKey": ""
+    }
+}

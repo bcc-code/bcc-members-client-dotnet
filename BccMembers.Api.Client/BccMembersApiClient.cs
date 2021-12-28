@@ -1,17 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using BccMembers.Api.Client.Contracts;
-using BccMembers.Api.Client.Extensions;
+
+[assembly: InternalsVisibleTo("BccMembers.Api.Client.Tests")]
 
 namespace BccMembers.Api.Client
 {
+
     internal class BccMembersApiClient : IBccMembersApiClient
     {
-        private readonly HttpClient httpClient;
+        private readonly ApiHttpClient httpClient;
 
-        public BccMembersApiClient(HttpClient httpClient)
+        public BccMembersApiClient(ApiHttpClient httpClient)
         {
             this.httpClient = httpClient;
         }

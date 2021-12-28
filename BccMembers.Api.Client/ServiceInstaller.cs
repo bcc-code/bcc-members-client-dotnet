@@ -5,25 +5,31 @@ using BccMembers.Api.Client;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-  public static class ServiceInstaller
-  {
-    public static IServiceCollection ConfigureBccMembersClient(this IServiceCollection services, string apiUrl, string apiKey)
+    public static class ServiceInstaller
     {
-      services.AddHttpClient("BccMembersApiClient", httpClient =>
-      {
-        httpClient.BaseAddress = new Uri(apiUrl);
-        httpClient.DefaultRequestHeaders.Clear();
-        httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        httpClient.DefaultRequestHeaders.Add("x-access-token", apiKey);
-      });
+        public static IServiceCollection ConfigureBccMembersClient(this IServiceCollection services, string apiUrl, string apiKey)
+        {
+            return services.AddTransient<IBccMembersApiClient>(x =>
+            {
+                var clientFactory = x.GetRequiredService<IHttpClientFactory>();
+                var apiClient = new ApiHttpClient(clientFactory, new BccMembersApiClientOptions
+                {
+                    ApiBasePath = apiUrl,
+                    ApiKey = apiKey
+                });
+                return new BccMembersApiClient(apiClient);
+            });
+        }
 
-      return services.AddTransient<IBccMembersApiClient>(x =>
-      {
-        var clientFactory = x.GetRequiredService<IHttpClientFactory>();
-        var httpClient = clientFactory.CreateClient("BccMembersApiClient");
+        public static IServiceCollection ConfigureBccMembersClient(this IServiceCollection services, BccMembersApiClientOptions options)
+        {
+            return services.AddTransient<IBccMembersApiClient>(x =>
+            {
+                var clientFactory = x.GetRequiredService<IHttpClientFactory>();
+                var apiClient = new ApiHttpClient(clientFactory, options);
+                return new BccMembersApiClient(apiClient);
+            });
+        }
 
-        return new BccMembersApiClient(httpClient);
-      });
     }
-  }
 }
